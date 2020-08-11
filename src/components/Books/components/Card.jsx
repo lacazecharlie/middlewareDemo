@@ -1,8 +1,9 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import React, { Component } from 'react';
-import './style.css';
+import React, { Component } from "react";
+import { string } from "prop-types";
+import "./style.css";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -26,14 +27,21 @@ class Card extends Component {
           <div className="card-title">
             <h3>{title}</h3>
           </div>
-          {downloadLink && <a onClick={() => window.open(downloadLink)}>download</a>}
+          {downloadLink && (
+            <a onClick={() => window.open(downloadLink)}>download</a>
+          )}
         </div>
       </div>
     );
   }
 }
 
-Card.propTypes = {};
+Card.propTypes = {
+  imgLink: string,
+  date: string,
+  title: string,
+  downloadLink: string
+};
 Card.defaultProps = {};
 
 /* ************************************* */

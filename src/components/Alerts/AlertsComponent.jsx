@@ -2,6 +2,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from "react";
+import { func, string, arrayOf } from "prop-types"
 import "./style.css";
 
 /* ************************************* */
@@ -27,7 +28,10 @@ class AlertsComponent extends Component {
   }
 }
 
-AlertsComponent.propTypes = {};
+AlertsComponent.propTypes = {
+  alertList: arrayOf(string),
+  clearNotification: func,
+};
 AlertsComponent.defaultProps = {};
 
 /* ************************************* */

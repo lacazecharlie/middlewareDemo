@@ -2,7 +2,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { func, array, shape } from "prop-types";
 import get from "lodash/get";
 import "./style.css";
 import Card from "./components/Card";
@@ -71,7 +71,10 @@ class BooksListComponent extends Component {
 }
 
 BooksListComponent.propTypes = {
-  fetchBooks: PropTypes.func
+  fetchBooks: func,
+  bookList: shape({
+    items: array,
+  })
 };
 BooksListComponent.defaultProps = {};
 
