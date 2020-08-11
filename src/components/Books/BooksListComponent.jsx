@@ -3,6 +3,9 @@
 /* ************************************* */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import get from "lodash/get";
+import "./style.css";
+import Card from "./components/Card";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -23,10 +26,11 @@ class BooksListComponent extends Component {
     this.setState({ researchParameterValue: target.value });
   };
 
-  handleFetchBooks = () => {
+  handleFetchBooks = (event) => {
     const { fetchBooks } = this.props;
     const { researchParameterValue } = this.state;
     fetchBooks(researchParameterValue);
+    event.preventDefault();
   };
 
   render() {
@@ -35,19 +39,32 @@ class BooksListComponent extends Component {
 
     return (
       <div>
-        <input
-          onChange={this.handleInputChange}
-          value={researchParameterValue}
-        />
-        <button onClick={this.handleFetchBooks}>GO</button>
-        {bookList && bookList.items.length && bookList.items.map(bookItem => {
-          return (
-            <div key={bookItem.id}>
-              <h1>{bookItem.volumeInfo.title}</h1>
-              <img src={bookItem.imageLinks.thumbnail} alt="book img" />
-            </div>
-          )
-        })}
+        <h1 className="flex-center">BOOKS SEARCHING</h1>
+        <form onSubmit={this.handleFetchBooks} className="flex-center">
+          <input
+            type="text"
+            placeholder="Search for a book name"
+            onChange={this.handleInputChange}
+            value={researchParameterValue}
+          />
+          <button type="submit">GO</button>
+        </form>
+        <div className="cardList">
+          {get(bookList, "items", []).map(bookItem => {
+            return (
+              <Card
+                title={get(bookItem, "volumeInfo.title", "TITLE")}
+                imgLink={get(bookItem, "volumeInfo.imageLinks.thumbnail")}
+                date={get(bookItem, "volumeInfo.publishedDate")}
+                downloadLink={get(
+                  bookItem,
+                  "accessInfo.pdf.downloadLink",
+                  get(bookItem, "accessInfo.webReaderLink")
+                )}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

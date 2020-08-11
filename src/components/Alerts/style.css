@@ -1,32 +1,31 @@
+.alertList {
+  position: fixed; /* Sit on top of the screen */
+  left: 35%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
 .alert {
-  visibility: visible; /* Show the snackbar */
   min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
+  margin: 2px; /* Divide value of min-width by 2 */
   background-color: #333; /* Black background color */
   color: #fff; /* White text color */
   text-align: center; /* Centered text */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
-  bottom: 30px; /* 30px from the bottom */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-
-
-.modal-sizing {
-  max-width: 175vh;
+.close-btn {
+  background: inherit;
+  border: inherit;
+  color: white;
+  position: relative;
+  top: -15px;
+  left: 98%;
 }
 
-.modal-sizing-xs {
-  max-width: 85vh;
-}
-
-.separator-top {
-  border-top-width: 1px;
-  border-top-style: dashed;
-  margin: 0;
+.justify-end {
+  justify-items: end;
+  display: flex;
+  align-items: center;
 }
