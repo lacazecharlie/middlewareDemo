@@ -21,9 +21,8 @@ const books = ({ dispatch }) => next => action => {
 
   if (action.type === FETCH_BOOKS) {
     const query = action.payload;
-    const otherMeta = action.meta;
     const url = `${BOOKS_URL}?q=${query}&&maxResults=40`;
-    dispatch(apiRequest(url, "GET", null, BOOKS, otherMeta));
+    dispatch(apiRequest(url, "GET", null, BOOKS));
     dispatch(setLoader(true));
   }
 
