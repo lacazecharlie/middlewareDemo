@@ -2,6 +2,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from 'react';
+import { string } from 'prop-types';
 import './style.css';
 
 /* ************************************* */
@@ -33,7 +34,12 @@ class Card extends Component {
   }
 }
 
-Card.propTypes = {};
+Card.propTypes = {
+  imgLink: string,
+  date: string,
+  title: string,
+  downloadLink: string,
+};
 Card.defaultProps = {};
 
 /* ************************************* */

@@ -2,7 +2,7 @@
 /* ********       IMPORTS       ******** */
 /* ************************************* */
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { array, func, shape } from "prop-types";
 import get from "lodash/get";
 import "./style.css";
 import Card from "./components/Card";
@@ -26,7 +26,7 @@ class BooksListComponent extends Component {
     this.setState({ researchParameterValue: target.value });
   };
 
-  handleFetchBooks = (event) => {
+  handleFetchBooks = event => {
     const { fetchBooks } = this.props;
     const { researchParameterValue } = this.state;
     fetchBooks(researchParameterValue);
@@ -71,7 +71,10 @@ class BooksListComponent extends Component {
 }
 
 BooksListComponent.propTypes = {
-  fetchBooks: PropTypes.func
+  fetchBooks: func,
+  bookList: shape({
+    items: array,
+  })
 };
 BooksListComponent.defaultProps = {};
 

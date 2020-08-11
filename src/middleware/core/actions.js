@@ -1,6 +1,6 @@
 import { API_ERROR, API_REQUEST, API_SUCCESS } from "./types";
 
-export function apiRequest(url, method, body, feature, otherMeta) {
+export function apiRequest(url, method, body, feature) {
   return {
     type: `${feature} ${API_REQUEST}`,
     payload: {
@@ -9,24 +9,23 @@ export function apiRequest(url, method, body, feature, otherMeta) {
       body
     },
     meta: {
-      feature,
-      ...otherMeta
+      feature
     }
   };
 }
 
-export function apiSuccess(response, feature, otherMeta) {
+export function apiSuccess(response, feature) {
   return {
     type: `${feature} ${API_SUCCESS}`,
     payload: response,
-    meta: { feature, ...otherMeta }
+    meta: { feature }
   };
 }
 
-export function apiError(error, feature, otherMeta) {
+export function apiError(error, feature) {
   return {
     type: `${feature} ${API_ERROR}`,
     payload: error,
-    meta: { feature, ...otherMeta }
+    meta: { feature }
   };
 }
