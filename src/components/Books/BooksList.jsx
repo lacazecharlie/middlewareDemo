@@ -4,7 +4,6 @@
 import { connect } from "react-redux";
 import BooksListComponent from "./BooksListComponent";
 import { fetchBooks } from "./actions";
-import BooksReducer from "./reducer";
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
@@ -13,8 +12,11 @@ import BooksReducer from "./reducer";
 /* ************************************* */
 /* ********  PRIVATE FUNCTIONS  ******** */
 /* ************************************* */
-function mapStateToProps(state, ownProps) {
-  return { bookList: state.BooksReducer.bookList };
+function mapStateToProps(state) {
+  return {
+    bookList: state.BooksReducer.bookList,
+    bookPending: state.BooksReducer.bookPending
+  };
 }
 
 const mapDispatchToProps = {

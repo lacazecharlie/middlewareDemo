@@ -1,5 +1,6 @@
 const initialState = {
   bookList: null,
+  bookPending: false,
 };
 
 export default (state = initialState, action) => {
