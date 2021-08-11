@@ -4,10 +4,6 @@ export function fetchBooks(query) {
   return {
     type: FETCH_BOOKS,
     payload: query,
-    meta: {
-      applyAlphaSort: true,
-      sortingKey: 'volumeInfo.title'
-    }
   };
 }
 

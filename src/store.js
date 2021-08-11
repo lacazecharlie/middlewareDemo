@@ -3,7 +3,7 @@
 /* ************************************* */
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
-import customMiddleware from './middleware/index';
+import BooksMiddleware from './components/Books/BooksMiddleware';
 import { middlewareApi } from 'common-uitoolkit-beyond';
 import reducers from "./reducers";
 
@@ -21,5 +21,5 @@ const composeEnhancers = composeWithDevTools({});
 /* ************************************* */
 export default createStore(
   reducers,
-  composeEnhancers(applyMiddleware(middlewareApi,...customMiddleware))
+  composeEnhancers(applyMiddleware(middlewareApi,...BooksMiddleware))
 );

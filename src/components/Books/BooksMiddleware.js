@@ -21,7 +21,7 @@ const books = ({ dispatch }) => next => action => {
   if (action.type === FETCH_BOOKS) {
     const query = action.payload;
     const fetchProperties = BOOKS.getGoogleBooksFetchProperties(query, 40)
-    dispatch(apiRequest({ ...fetchProperties, feature}));
+    dispatch(apiRequest({ ...fetchProperties, feature }));
     dispatch(setLoader(true));
   }
 
