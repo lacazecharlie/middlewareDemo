@@ -1,17 +1,16 @@
 /* ************************************* */
 /* ********       IMPORTS       ******** */
 /* ************************************* */
-import { BOOKS, FETCH_BOOKS } from "./types";
-import { apiRequest } from "../../middleware/core/actions";
+import { apiRequest, API_ERROR, API_SUCCESS } from 'common-uitoolkit-beyond';
 import { setBooks, setLoader } from "./actions";
-import { API_ERROR, API_SUCCESS } from "../../middleware/core/types";
 import { setNotification } from "../Alerts/actions";
+import { FETCH_BOOKS } from "./types";
+import BOOKS from '../../Api/Books';
 
 /* ************************************* */
 /* ********      VARIABLES      ******** */
 /* ************************************* */
-// const BOOKS_URL = "https://www.googleapis e nj<xbvlmqs .com/books/v1/volumes";
-const BOOKS_URL = "https://www.googleapis.com/books/v1/volumes";
+const feature = '[BOOKS]'
 
 /* **************************************** */
 /* ********        MIDDLEWARE      ******** */
@@ -21,37 +20,22 @@ const books = ({ dispatch }) => next => action => {
 
   if (action.type === FETCH_BOOKS) {
     const query = action.payload;
-    const otherMeta = action.meta;
-    const url = `${BOOKS_URL}?q=${query}&&maxResults=40`;
-    dispatch(apiRequest(url, "GET", null, BOOKS, otherMeta));
+    const fetchProperties = BOOKS.getGoogleBooksFetchProperties(query, 40)
+    dispatch(apiRequest({ ...fetchProperties, feature}));
     dispatch(setLoader(true));
   }
 
-  if (action.type === `${BOOKS} ${API_SUCCESS}`) {
+  if (action.type === `${feature} ${API_SUCCESS}`) {
     dispatch(setLoader(false));
-    dispatch(setBooks(action.payload));
+    dispatch(setBooks(action.payload.data));
   }
 
-  if (action.type === `${BOOKS} ${API_ERROR}`) {
+  if (action.type === `${feature} ${API_ERROR}`) {
     dispatch(setLoader(false));
     dispatch(setNotification(action.payload, BOOKS));
   }
 };
-
-const notificationBooks = ({ dispatch }) => next => action => {
-  next(action);
-
-  if (action.type === `${BOOKS} ${API_SUCCESS}`) {
-    const data = action.payload;
-    if (data.error) {
-      dispatch(setNotification(data.error.message, BOOKS));
-    } else if (!data.items || !data.items.length) {
-      dispatch(setNotification("no data for the current research", BOOKS));
-    }
-  }
-};
-
 /* ************************************* */
 /* ********       EXPORTS       ******** */
 /* ************************************* */
-export default [books, notificationBooks];
+export default [books];
